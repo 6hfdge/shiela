@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+          /* General styles */
+         body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 13.5px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #9400d3, #ff6f00, #ffd600); /* Electric purple gradient background */
+            color: #333; /* Default text color */
+header {
+            background-color: linear-gradient(to bottom, #9400d3, #ff6f00, #ffd600); /* Electric purple gradient background */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 210px; /* Adjust the width of the logo as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 220px; /* Add some spacing between the logo and the title */
+        }
+
+        .title {
+            flex: 1; /* Allow the title to expand and take up remaining space */
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        /* Main content styles */
+        main {
+            padding: 20px;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .container .section {
+            flex: 0 0 48%;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container .section h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .container .section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .container .section img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Special offer section */
+        .special-offer {
+    width: 100%; /* Fill the entire width */
+    height: 100%; /* Fill the entire height */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 5000px; /* Limit height to enable scrolling */
+}
+
+        .special-offer h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .special-offer img {
+            width: 200%;
+            width: 200%;
+            max-width: 150px;
+            border-radius: 5%;
+            margin-bottom: 10px;
+        }
+
+        .special-offer p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Category styles */
+        .category {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: linear-gradient(to bottom, #9400d3, #ff6f00, #ffd600); /* Electric purple gradient background */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap; /* Prevent line breaks */
+        }
+
+        .category h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .category img {
+            width: 100%;
+            max-width: 100px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .category p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Product styles */
+        .product {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .product img {
+            max-width: 200%;
+            height: 300px; /* Set a fixed height for the images */
+        }
+
+        .product h4 {
+            margin-top: 10px;
+            color: #333;
+            font-weight: bold;
+            font-size: 13.5px;
+        }
+
+        .product p {
+            margin: 10px 0;
+            color: #333;
+            font-weight: bold;
+            font-size: 13.5px;
+        }
+
+        .product button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product button:hover {
+            background-color: #0056b3;
+        }
+      /* Adjusting search input */
+        form.example {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            background: #f1f1f1;
+            border-radius: 20px; /* Rounded corners */
+            width: 500px; /* Adjust width */
+        }
+
+        /* Style the submit button */
+        form.example button {
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none; /* Prevent double borders */
+            cursor: pointer;
+            border-radius: 20px; /* Rounded corners */
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+		/* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+		 /* CSS styles for the login and register forms */
+        .form-container {
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="password"],
+        .form-container input[type="email"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .form-container .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+		  /* CSS styles for the cart */
+        .cart-container {
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .cart-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-container .product {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .cart-container .product:last-child {
+            border-bottom: none;
+        }
+
+        .cart-container .product img {
+            max-width: 100px;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .cart-container .product p {
+            margin: 10px 0;
+        }
+
+        .cart-container .product button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        .cart-container .product button:hover {
+            background-color: #45a049;
+        }
+
+        .cart-container .total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+		/* Cart item styles */
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .item-price {
+        margin-left: 20px;
+    }
+
+    .remove-item {
+        background-color: #ff3333;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .remove-item:hover {
+        background-color: #cc0000;
+    }
+
+    /* Form group styles, Checkout button and status styles remain the same */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+	/* Custom styles for the payment form */
+    #paymentForm {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+        width: 95%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-group.half-width {
+        width: calc(50% - 10px);
+    }
+
+    #checkoutBtn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #checkoutBtn:hover {
+        background-color: #0056b3;
+    }
+
+    #checkoutStatus {
+        margin-top: 10px;
+        text-align: center;
+    }
+	 /* Custom styles for the modal content and grid layout */
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .left-page,
+    .right-page {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .left-page {
+        grid-column: 1;
+    }
+
+    .right-page {
+        grid-column: 2;
+    }
+
+    /* Additional styles for form layout */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-group.half-width {
+        width: calc(50% - 10px);
+    }
+
+    #checkoutBtn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #checkoutBtn:hover {
+        background-color: #0056b3;
+    }
+
+    #checkoutStatus {
+        margin-top: 10px;
+        text-align: center;
+    }
+	/* Style for the Checkout Selected Items button */
+#checkoutSelectedBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+}
+
+#checkoutSelectedBtn:hover {
+    background-color: #0056b3;
+}
+ /* Animation for products */
+    .product {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 20px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        transition: transform 0.3s ease; /* Smooth transition effect */
+        animation: productAnimation 5s infinite; /* Animation for continuous playback */
+    }
+
+    /* Animation on hover */
+    .product:hover {
+        transform: scale(1.05); /* Increase the scale on hover */
+        animation-play-state: paused; /* Pause animation on hover */
+    }
+
+    @keyframes productAnimation {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <img src="C:\Users\Administrator\Desktop\LOGOS\L26-remove.png" alt="Store Logo"> <!-- Replace "path_to_your_logo_image" with the actual path to your logo image -->
+        <h1>Rosin's Bibliophilic Emporium</h1>
+		<h4>Your trusted source for literary treasures</h4>
+    </header>
+	 <nav>
+        <ul>
+             <li><a href="file:///C:/Users/Administrator/Desktop/Homepage.html">Homepage</a></li>
+            <li><a href="file:///C:/Users/Administrator/Desktop/Categories.html">Categories</a></li>
+            <li><a href="file:///C:/Users/Administrator/Desktop/BRANDS.html">Premium Products</a></li>
+            <li><a href="#">Featured Products</a></li>
+			 <li><a href="file:///C:/Users/Administrator/Desktop/Branches.html">Branches</a></li>
+            <li><a href="file:///C:/Users/Administrator/Desktop/PROJECT%20WEBSITE/About%20us.html">About Us</a></li>
+            <li><a href="file:///C:/Users/Administrator/Desktop/Contact%20us.html">Contact Us</a></li>
+        </ul><br>
+        <form class="example" onsubmit="searchBooks(event)">
+        <input type="text" id="searchInput" placeholder="Search product.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+		<div class="button-group">
+             <button onclick="openModal('loginModal')">
+                <i style="font-size:24px; margin-right: 5px;" class="fa">&#xf007;</i>
+                Login
+            </button>
+            <button onclick="openModal('registerModal')">
+                <i style="font-size:24px" class="fa">&#xf25d;</i>
+                Register
+			</button>
+			<!-- Cart button -->
+<button onclick="openCart()">
+    <i class="fa fa-shopping-cart"></i> Cart
+</button>
+        </div>
+    </nav>
+	
+    <main>
+	 <div class="container">
+		  <!-- Special offer section -->
+            <div class="special-offer">
+                <h2></h2><br>   
+	<marquee behavior="scroll" direction="right">
+	<img src="C:\Users\Administrator\Desktop\Products Images\SL 1.webp" align="center" width="150" height="200"> 
+        <div class="container">
+		<div class="product">
+		<h4>Jujutsu Kaisen, Vol.</h4>
+			</div>
+		</marquee>   
+		
+         <div class="container">
+		  <!-- Special offer section -->
+            <div class="special-offer">
+                <h2>Rosin's Bibliophilic Emporium Collections</h2><br>     
+		 
+		 <div class="category">
+                    <h3>Jujutsu Kaisen, Vol.</h3>
+                    <div class="product-container">
+                        <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 1.webp" alt="Product 1">
+                              <h4>Jujutsu Kaisen, Vol. 2</h4>
+							   <p>Price: ₱550.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 2', 550.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 2', 550.00)">Buy</button>
+                        </div>
+                        <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 2.webp" alt="Product 2">
+                           <h4>Jujutsu Kaisen, Vol. 1</h4>
+						    <p>Price: ₱550.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 1', 550.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 1', 550.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 3.webp" alt="Product 3">
+                           <h4>Jujutsu Kaisen, Vol. 0</h4>
+						    <p>Price: ₱550.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 0', 550.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 0', 550.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 4.webp" alt="Product 4">
+                           <h4>Jujutsu Kaisen, Vol. 14</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 14', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 14', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 5.webp" alt="Product 5">
+                           <h4>Jujutsu Kaisen, Vol. 12</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 12', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 12', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 6.webp" alt="Product 6">
+                           <h4>Jujutsu Kaisen, Vol. 11</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 11', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 11', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 7.webp" alt="Product 7">
+                           <h4>Jujutsu Kaisen, Vol. 13</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 13', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 13', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 8.jpg" alt="Product 8">
+                           <h4>Jujutsu Kaisen, Vol. 3</h4>
+						    <p>Price: ₱599.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 3', 599.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 3', 599.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 9.jpg" alt="Product 9">
+                           <h4>Jujutsu Kaisen, Vol. 4</h4>
+						    <p>Price: ₱550.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 4', 550.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 4', 550.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 10.jpg" alt="Product 10">
+                           <h4>Jujutsu Kaisen, Vol. 7</h4>
+						    <p>Price: ₱599.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 7', 599.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 7', 599.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 11.webp" alt="Product 11">
+                           <h4>Jujutsu Kaisen, Vol. 15</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 15', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 15', 569.00)">Buy</button>
+						    </div>
+						   <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 12.webp" alt="Product 12">
+                           <h4>Jujutsu Kaisen, Vol. 16</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 16', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 16', 569.00)">Buy</button>
+						    </div>
+						   <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 13.jpg" alt="Product 13">
+                           <h4>Jujutsu Kaisen, Vol. 5</h4>
+						    <p>Price: ₱599.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 5', 599.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 5', 599.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 14.webp" alt="Product 14">
+                           <h4>Jujutsu Kaisen, Vol. 10</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 10', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 10', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 15.jpg" alt="Product 14">
+                           <h4>Jujutsu Kaisen, Vol. 6</h4>
+						    <p>Price: ₱569.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 6', 569.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 6', 569.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 16.webp" alt="Product 14">
+                           <h4>Jujutsu Kaisen, Vol. 8</h4>
+						    <p>Price: ₱550.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 14', 550.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 14', 550.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 17.webp" alt="Product 14">
+                           <h4>Jujutsu Kaisen, Vol. 9</h4>
+						    <p>Price: ₱599.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen, Vol. 9', 599.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen, Vol. 9', 599.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MA 18.webp" alt="Product 15">
+                           <h4>Jujutsu Kaisen</h4>
+						    <p>Price: ₱966.00</p>
+							   <button onclick="addToCart('Jujutsu Kaisen', 966.00)">Add to Cart</button>
+							   <button onclick="buy('Jujutsu Kaisen', 966.00)">Buy</button>
+                        </div>
+                        <!-- Add more products here -->
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>True Beauty, Vol.</h3>
+                    <div class="product-container">
+                          
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 5.webp" alt="Product 6">
+                            <h4>True Beauty, Vol. 1</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 1', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 1', 1,450.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 6.webp" alt="Product 7">
+                            <h4>True Beauty, Vol. 2</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 2', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 2', 1,450.00)">Buy</button>
+                        </div>
+							<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 7.webp" alt="Product 8">
+                            <h4>True Beauty, Vol. 3</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 3', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 3', 1,450.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 8.webp" alt="Product 9">
+                            <h4>True Beauty, Vol. 4</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 4', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 4', 1,450.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 9.webp" alt="Product 10">
+                            <h4>True Beauty, Vol. 5</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 5', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 5', 1,450.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\MW 12.webp" alt="Product 11">
+                            <h4>True Beauty, Vol. 6</h4>
+							<p>Price: ₱1,450.00</p>
+							   <button onclick="addToCart('True Beauty, Vol. 6', 1450.00)">Add to Cart</button>
+							   <button onclick="buy('True Beauty, Vol. 6', 1450.00)">Buy</button>
+                        </div>
+						
+                        <!-- Add more products here -->
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Demon Slayer: Kimetsu no Yaiba, Vol.</h3>
+                    <div class="product-container">
+                        <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 1.webp" alt="Product 1">
+                           <h4>Kimetsu no Yaiba, Vol. 1</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 1', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 1', 579.00)">Buy</button>
+                        </div>
+                      <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 2.webp" alt="Product 2">
+                           <h4>Kimetsu no Yaiba, Vol. 2</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 2', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 2', 579.00)">Buy</button>
+                        </div>
+						 <div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 3.webp" alt="Product 3">
+                           <h4>Kimetsu no Yaiba, Vol. 3</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 3', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 3', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 4.webp" alt="Product 4">
+                           <h4>Kimetsu no Yaiba, Vol. 4</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 4', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 4', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 5.webp" alt="Product 5">
+                           <h4>Kimetsu no Yaiba, Vol. 5</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 5', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 5', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 6.webp" alt="Product 6">
+                           <h4>Kimetsu no Yaiba, Vol. 6</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 6', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 6', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 7.webp" alt="Product 7">
+                           <h4>Kimetsu no Yaiba, Vol. 7</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 7', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 7', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 8.webp" alt="Product 8">
+                           <h4>Kimetsu no Yaiba, Vol. 8</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 8', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 8', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 9.webp" alt="Product 9">
+                           <h4>Kimetsu no Yaiba, Vol. 9</h4>
+						    <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 9', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 9', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 10.webp" alt="Product 10">
+                           <h4>Kimetsu no Yaiba, Vol. 10</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 10', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 10', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 11.webp" alt="Product 11">
+                           <h4>Kimetsu no Yaiba, Vol. 11</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 11', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 11', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 12.webp" alt="Product 12">
+                           <h4>Kimetsu no Yaiba, Vol. 12</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 12', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 12', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 13.webp" alt="Product 13">
+                           <h4>Kimetsu no Yaiba, Vol. 13</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 13', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 13', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 14.jpg" alt="Product 14">
+                           <h4>Kimetsu no Yaiba, Vol. 14</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 14', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 14', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 15.jpg" alt="Product 15">
+                           <h4>Kimetsu no Yaiba, Vol. 15</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 15', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 15', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 16.jpg" alt="Product 16">
+                           <h4>Kimetsu no Yaiba, Vol. 16</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 16', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 16', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 17.webp" alt="Product 17">
+                           <h4>Kimetsu no Yaiba, Vol. 17</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 17', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 17', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 18.webp" alt="Product 18">
+                           <h4>Kimetsu no Yaiba, Vol. 18</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 18', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 18', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 19.webp" alt="Product 19">
+                           <h4>Kimetsu no Yaiba, Vol. 19</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 19', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 19', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 20.webp" alt="Product 20">
+                           <h4>Kimetsu no Yaiba, Vol. 20</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 9', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 9', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 21.webp" alt="Product 21">
+                           <h4>Kimetsu no Yaiba, Vol. 21</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 21', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 21', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 22.webp" alt="Product 22">
+                           <h4>Kimetsu no Yaiba, Vol. 22</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 22', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 22', 579.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\DS 23.webp" alt="Product 23">
+                           <h4>Kimetsu no Yaiba, Vol. 23</h4>
+						   <p>Price: ₱579.00</p>
+							   <button onclick="addToCart('Kimetsu no Yaiba, Vol. 23', 579.00)">Add to Cart</button>
+							   <button onclick="buy('Kimetsu no Yaiba, Vol. 23', 579.00)">Buy</button>
+                        </div>
+                        <!-- Add more products here -->
+                    </div>
+                </div>
+				 <div class="category">
+                    <h3>Im: Great Priest Imhotep, Vol.</h3>
+                    <div class="product-container">
+                          
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 1.webp" alt="Product 1">
+                            <h4>Great Priest, Vol. 1</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 1', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 1', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 2.webp" alt="Product 2">
+                            <h4>Great Priest, Vol. 2</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 2', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 2', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 3.webp" alt="Product 4">
+                            <h4>Great Priest, Vol. 4</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 4', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 4', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 4.webp" alt="Product 5">
+                            <h4>Great Priest, Vol. 5</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 5', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 5', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 5.webp" alt="Product 6">
+                            <h4>Great Priest, Vol. 7</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 7', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 7', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 6.jpg" alt="Product 7">
+                            <h4>Great Priest, Vol. 8</h4>
+							 <p>Price: ₱840.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 8', 840.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 8', 840.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\GP 7.webp" alt="Product 8">
+                            <h4>Great Priest, Vol. 10</h4>
+							 <p>Price: ₱860.00</p>
+							   <button onclick="addToCart('Great Priest, Vol. 10', 860.00)">Add to Cart</button>
+							   <button onclick="buy('Great Priest, Vol. 10', 860.00)">Buy</button>
+                        </div>
+						 <!-- Add more products here -->
+            </div>
+        </div>
+					 <div class="category">
+                    <h3>One Piece (Omnibus Edition), Vol.</h3>
+                    <div class="product-container">
+                          
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 1.webp" alt="Product 1">
+                            <h4>One Piece, Vol. 1</h4>
+							 <p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 1', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 1', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 2.webp" alt="Product 2">
+                            <h4>One Piece, Vol. 2</h4>
+							<p>Price: ₱860.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 2', 860.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 2', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 3.jpg" alt="Product 3">
+                            <h4>One Piece, Vol. 3</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 3', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 3', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 4.webp" alt="Product 4">
+                            <h4>One Piece, Vol. 4</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 4', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 4', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 5.webp" alt="Product 5">
+                            <h4>One Piece, Vol. 5</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 5', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 5', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 6.webp" alt="Product 6">
+                            <h4>One Piece, Vol. 6</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 6', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 6', 906.00)">Buy</button>
+							
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 7.webp" alt="Product 7">
+                            <h4>One Piece, Vol. 7</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 7', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 7', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 8.webp" alt="Product 8">
+                            <h4>One Piece, Vol. 8</h4>
+							<p>Price: ₱860.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 8', 860.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 8', 860.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 9.webp" alt="Product 9">
+                            <h4>One Piece, Vol. 9</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 9', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 9', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 10.webp" alt="Product 10">
+                            <h4>One Piece, Vol. 10</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 10', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 10', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 11.webp" alt="Product 11">
+                            <h4>One Piece, Vol. 11</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 11', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 11', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 12.webp" alt="Product 12">
+                            <h4>One Piece, Vol. 12</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 12', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 12', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 13.jpg" alt="Product 13">
+                            <h4>One Piece, Vol. 13</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 13', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 13', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 14.jpg" alt="Product 14">
+                            <h4>One Piece, Vol. 14</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 14', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 14', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 15.webp" alt="Product 15">
+                            <h4>One Piece, Vol. 15</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 15', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 15', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 16.webp" alt="Product 16">
+                            <h4>One Piece, Vol. 16</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 16', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 16', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 17.webp" alt="Product 17">
+                            <h4>One Piece, Vol. 17</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 17', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 17', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 18.webp" alt="Product 18">
+                            <h4>One Piece, Vol. 18</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 18', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 18', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 19.webp" alt="Product 19">
+                            <h4>One Piece, Vol. 19</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 19', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 19', 906.00)">Buy</button>
+                        </div>
+						<div class="product">
+                            <img src="C:\Users\Administrator\Desktop\Products Images\OP 20.webp" alt="Product 20">
+                            <h4>One Piece, Vol. 20</h4>
+							<p>Price: ₱906.00</p>
+							   <button onclick="addToCart('One Piece, Vol. 20', 906.00)">Add to Cart</button>
+							   <button onclick="buy('One Piece, Vol. 20', 906.00)">Buy</button>
+                        </div>
+						 <!-- Add more products here -->
+            </div>
+        </div>
+    </main>
+	<div id="loginModal" class="modal">
+        <div class="form-container">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+   <div id="registerModal" class="modal">
+        <div class="form-container">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form>
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('cartModal')">&times;</span>
+        <h2>List Items</h2>
+        <div class="grid-container">
+            <!-- Left Page: Items in Cart -->
+            <div class="left-page">
+                <h3>Items in Cart</h3>
+                <div id="cartItems"></div>
+                <button id="checkoutSelectedBtn" onclick="checkoutSelected()">Checkout Selected Items</button>
+            </div>
+			
+            <!-- Right Page: Payment Form -->
+            <div class="right-page">
+                <h3>Payment</h3>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="checkoutBtn">Proceed to Checkout</button>
+                    <div id="checkoutStatus"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+		 document.getElementById('category').addEventListener('change', function() {
+            var selectedCategory = this.value;
+            var categories = document.querySelectorAll('.books');
+
+            categories.forEach(function(category) {
+                if (category.id === selectedCategory) {
+                    category.style.display = 'flex';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+        // Function to open modal
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        // Function to close modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        // Function to open cart
+        function openCart() {
+            var cartModal = document.getElementById('cartModal');
+            cartModal.style.display = "block";
+            displayCartItems();
+        }
+
+        // Function to display cart items
+        function displayCartItems() {
+            var cartItemsContainer = document.getElementById('cartItems');
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach(function(item) {
+                    var itemElement = document.createElement('div');
+                    itemElement.innerHTML = '<p>' + item.name + ' - ' + item.price + '</p>';
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+        }
+		 $(document).ready(function() {
+            // Buy button functionality
+            $('.buy').click(function() {
+                // Get product details
+                var productName = $(this).siblings('p').eq(0).text();
+                var productPrice = $(this).siblings('p').eq(1).text().split(': ')[1];
+                // Prepare data for purchase (you can modify this according to your needs)
+                var purchaseData = {
+                    name: productName,
+                    price: productPrice
+                };
+                // Here you can perform further actions such as sending purchase data to a backend server, processing payment, etc.
+                // For demonstration purposes, let's just log the purchase data to the console
+                console.log('Purchase data:', purchaseData);
+                // Display success message (you can replace this with your own UI/UX)
+                alert('Purchase successful!');
+            });
+        });
+		// Function to open modal
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        // Function to close modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+		function searchBooks(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get the search input value
+            var searchInput = document.getElementById("searchInput").value.toLowerCase();
+
+            // Get all book elements
+            var books = document.querySelectorAll(".book");
+
+            // Loop through each book and hide/show based on search input
+            books.forEach(function(book) {
+                var bookName = book.querySelector("p").textContent.toLowerCase();
+                if (bookName.includes(searchInput)) {
+                    book.style.display = "block"; // Show book
+                } else {
+                    book.style.display = "none"; // Hide book
+                }
+            });
+        }
+		 // Function to open cart modal
+    function openCart() {
+        var cartModal = document.getElementById('cartModal');
+        cartModal.style.display = "block";
+        displayCartItems();
+    }
+
+    // Function to display cart items
+    function displayCartItems() {
+        var cartItemsContainer = document.getElementById('cartItems');
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach(function(item, index) {
+                var itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                itemElement.innerHTML = `
+                    <div class="item-details">
+                        <p>${item.name} - ${item.price}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button onclick="removeItem(${index})">Remove</button>
+                        <input type="checkbox" id="checkbox-${index}">
+                        <label for="checkbox-${index}">Select</label>
+                    </div>`;
+                cartItemsContainer.appendChild(itemElement);
+            });
+        }
+    }
+
+    // Function to remove item from cart
+    function removeItem(index) {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCartItems();
+    }
+
+    // Function to checkout selected items
+    function checkoutSelected() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var selectedItems = [];
+        var checkoutStatus = document.getElementById('checkoutStatus');
+
+        cart.forEach(function(item, index) {
+            var checkbox = document.getElementById('checkbox-' + index);
+            if (checkbox.checked) {
+                selectedItems.push(item);
+            }
+        });
+
+        if (selectedItems.length === 0) {
+            checkoutStatus.innerHTML = 'Please select items to checkout.';
+            return;
+        }
+
+        // Proceed with checkout for selected items
+        // Here, you can implement your checkout logic (e.g., sending data to backend, processing payment)
+        console.log('Selected items:', selectedItems);
+        checkoutStatus.innerHTML = 'Processing...';
+
+        setTimeout(function() {
+            // Simulate success message (replace this with your own logic)
+            checkoutStatus.innerHTML = 'Checkout successful!';
+            // Remove selected items from cart
+            selectedItems.forEach(function(selectedItem) {
+                var index = cart.findIndex(item => item.name === selectedItem.name && item.price === selectedItem.price);
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }, 2000); // Simulate processing delay of 2 seconds
+    }
+    // Event listener for payment form submission
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var cardNumber = document.getElementById('cardNumber').value;
+        var expiryDate = document.getElementById('expiryDate').value;
+        var cvv = document.getElementById('cvv').value;
+        var checkoutBtn = document.getElementById('checkoutBtn');
+        var checkoutStatus = document.getElementById('checkoutStatus');
+
+        // Simulate processing delay (for demonstration)
+        checkoutBtn.disabled = true;
+        checkoutStatus.innerHTML = 'Processing...';
+
+        setTimeout(function() {
+            // Perform checkout process here (e.g., sending data to backend, processing payment)
+            // Here, we simulate a successful checkout
+            alert('Thank you, ' + name + ', for your purchase. An email confirmation has been sent to ' + email + '.');
+            // Clear cart after checkout
+            localStorage.removeItem('cart');
+            displayCartItems();
+            closeModal('cartModal');
+            checkoutBtn.disabled = false;
+            checkoutStatus.innerHTML = '';
+        }, 2000); // Simulated delay of 2 seconds
+    });
+    </script>
+	
+	<!-- JavaScript files -->
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom script for adding items to the cart -->
+    <script>
+        $(document).ready(function() {
+            // Add to cart functionality
+            $('.add-to-cart').click(function() {
+                var productName = $(this).closest('.book').find('p').eq(0).text();
+                var productPrice = $(this).closest('.book').find('p').eq(1).text();
+                var product = {
+                    name: productName,
+                    price: productPrice
+                };
+                // Check if cart is already stored in local storage
+                var cart = JSON.parse(localStorage.getItem('cart')) || [];
+                // Add product to cart
+                cart.push(product);
+                // Store updated cart in local storage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                // Display success message (you can replace this with your own UI/UX)
+                alert('Product added to cart!');
+            });
+
+            // Function to update cart display in header
+            function updateCartDisplay() {
+                var cart = JSON.parse(localStorage.getItem('cart')) || [];
+                var cartCount = cart.length;
+                $('.cart a').html('<i class="fas fa-shopping-cart"></i> Cart (' + cartCount + ')');
+            }
+
+            // Call updateCartDisplay function on page load
+            updateCartDisplay();
+        });
+ // JavaScript to handle horizontal scrolling for product containers
+        // Get all product containers
+        const productContainers = document.querySelectorAll('.product-container');
+
+        // Add event listeners to each product container
+        productContainers.forEach(container => {
+            // Add event listener for scrolling left
+            container.addEventListener('wheel', event => {
+                if (event.deltaY !== 0) {
+                    event.preventDefault();
+                    container.scrollLeft += event.deltaY;
+                }
+            });
+        });
+  // Function to handle adding a product to the cart
+        function addToCart(productName, price) {
+            // Retrieve the cart from localStorage or initialize an empty array
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Add the product to the cart
+            cart.push({ name: productName, price: price });
+
+            // Save the updated cart back to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Alert the user that the product has been added to the cart (you can customize this)
+            alert(productName + ' added to cart!');
+        }
+
+        // Function to handle purchasing a product
+        function buy(productName, price) {
+            // Here you can implement additional logic for the buying process, such as redirecting to a checkout page, etc.
+            alert('You have purchased ' + productName + ' for $' + price);
+        }
+    </script>
+</body>
+</html>
+
+
+	 <!-- Email button -->
+        <button onclick="composeEmail()">
+            <i class="fa fa-envelope"></i> Email
+        </button>
+    </div>
